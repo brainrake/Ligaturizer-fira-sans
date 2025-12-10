@@ -1,3 +1,5 @@
+# This is a fork of Ligaturizer that works on Fira Sans. See Releases.
+
 # Ligaturizer #
 
 ![](images/banner.png)
