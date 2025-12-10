@@ -1,0 +1,76 @@
+name: Build and Release Liga Fira Sans
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Get short SHA
+        id: short_sha
+        run: echo "value=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fontforge fonttools
+
+      - name: Download Fira Sans fonts
+        run: bash ./download_fira_sans.sh
+
+      - name: Convert fonts to Liga Fira Sans
+        run: bash ./convert_fira_sans.sh
+
+      - name: Create output archive
+        run: |
+          cd fonts/output
+          tar -czf ../LigaFiraSans-${{ steps.short_sha.outputs.value }}.tar.gz *.ttf
+          zip -q ../LigaFiraSans-${{ steps.short_sha.outputs.value }}.zip *.ttf
+          ls -lh ../LigaFiraSans-*
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.short_sha.outputs.value }}
+          name: Liga Fira Sans - ${{ steps.short_sha.outputs.value }}
+          draft: false
+          prerelease: false
+          files: |
+            fonts/output/LigaFiraSans-*.tar.gz
+            fonts/output/LigaFiraSans-*.zip
+            fonts/output/*.ttf
+          body: |
+            # Liga Fira Sans Build
+            
+            **Commit:** `${{ github.sha }}`
+            **Short SHA:** `${{ steps.short_sha.outputs.value }}`
+            **Timestamp:** `${{ github.event.head_commit.timestamp }}`
+            
+            ## Contents
+            - **LigaFiraSans-*.tar.gz** - Compressed archive of all TTF fonts
+            - **LigaFiraSans-*.zip** - ZIP archive of all TTF fonts
+            - **Individual TTF files** - All converted font weights
+            
+            ## About Liga Fira Sans
+            These are Fira Sans fonts with proportional programming ligatures from Fira Code, maintaining Fira Sans' natural spacing rhythm.
+            
+            All font weights are included with both regular and italic variants.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
