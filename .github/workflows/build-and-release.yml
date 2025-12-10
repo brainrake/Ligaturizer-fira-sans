@@ -38,20 +38,30 @@ jobs:
       - name: Download Fira Sans fonts
         run: bash ./download_fira_sans.sh
 
+      - name: Create output directory
+        run: mkdir -p fonts/output
+
       - name: Convert fonts to Liga Fira Sans
         run: bash ./convert_fira_sans.sh
+        continue-on-error: true
 
       - name: List generated fonts
-        run: ls -lh fonts/output/ || echo "Output directory not found"
+        run: |
+          echo "=== Output directory contents ==="
+          ls -lh fonts/output/ || echo "Output directory not found"
+          echo "=== Fira Sans fonts ==="
+          ls -lh fonts/fira-sans/*.ttf | head -5
 
       - name: Create output archive
         run: |
           mkdir -p fonts/output
-          if [ -f fonts/output/*.ttf ]; then
+          TTF_COUNT=$(find fonts/output -name "*.ttf" -type f | wc -l)
+          if [ "$TTF_COUNT" -gt 0 ]; then
             cd fonts/output
             tar -czf LigaFiraSans-${{ steps.short_sha.outputs.value }}.tar.gz *.ttf
             zip -q LigaFiraSans-${{ steps.short_sha.outputs.value }}.zip *.ttf
             ls -lh LigaFiraSans-*
+            cd ..
           else
             echo "No TTF files found in fonts/output"
             exit 1
