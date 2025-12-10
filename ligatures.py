@@ -12,14 +12,29 @@ ligatures = [
             ## enabled by default if you use `--copy-character-glyphs`.
             'ampersand', 'asciicircum', 'asciitilde', 'asterisk',
             'backslash', 'bar',
-            'colon', 'equal', 'exclam', 'greater', 'hyphen',
-            'less', 'numbersign', 'percent', 'period', 'plus',
-            'question', 'semicolon', 'slash', 'underscore',
+            'colon',
+            'comma', 
+            'equal',
+            'exclam',
+            'greater',
+            'hyphen',
+            'less', 'numbersign', 'percent', 
+            'period', 
+            'plus',
+            'question', 
+            'semicolon', 
+            'slash', 
+            'underscore',
+            
+            'zero','one','two','three','four','five','six','seven','eight','nine',
 
             ## These characters are also used by the ligatures, but are likely
             ## to look more out of place when spliced into another font.
             # 'at', 'braceleft', 'braceright', 'bracketleft', 'bracketright',
             # 'dollar', 'parenleft', 'parenright', 'underscore', 'w'
+            'at', 'braceleft', 'braceright', 'bracketleft', 'bracketright',
+            'dollar', 'parenleft', 'parenright', 'underscore'
+
         ],
         'firacode_ligature_name': None,
     },
@@ -599,8 +614,8 @@ ligatures = [
         'chars': ['underscore', 'underscore'],
         'firacode_ligature_name': 'underscore_underscore.liga',
     },
-    {   # www
-        'chars': ['w', 'w', 'w'],
-        'firacode_ligature_name': 'w_w_w.liga',
-    },
+    # {   # www
+    #     'chars': ['w', 'w', 'w'],
+    #     'firacode_ligature_name': 'w_w_w.liga',
+    # },
 ]

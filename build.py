@@ -74,6 +74,18 @@ renamed_fonts = {
 
   # UFL
   'fonts/codeface/fonts/ubuntu-mono/*.ttf': 'Ubuntu Mono Ligaturized',
+  
+  # SIL OFL with reserved name - Fira Sans
+  'fonts/fira-sans/FiraSans-Regular.ttf': 'Liga Fira Sans',
+  'fonts/fira-sans/FiraSans-Bold.ttf': 'Liga Fira Sans Bold',
+  'fonts/fira-sans/FiraSans-Medium.ttf': 'Liga Fira Sans Medium',
+  'fonts/fira-sans/FiraSans-Light.ttf': 'Liga Fira Sans Light',
+  'fonts/fira-sans/FiraSans-SemiBold.ttf': 'Liga Fira Sans SemiBold',
+  'fonts/fira-sans/FiraSans-Italic.ttf': 'Liga Fira Sans Italic',
+  'fonts/fira-sans/FiraSans-BoldItalic.ttf': 'Liga Fira Sans Bold Italic',
+  'fonts/fira-sans/FiraSans-MediumItalic.ttf': 'Liga Fira Sans Medium Italic',
+  'fonts/fira-sans/FiraSans-LightItalic.ttf': 'Liga Fira Sans Light Italic',
+  'fonts/fira-sans/FiraSans-SemiBoldItalic.ttf': 'Liga Fira Sans SemiBold Italic',
 }
 
 #### Fonts we can't ligaturize. ####
