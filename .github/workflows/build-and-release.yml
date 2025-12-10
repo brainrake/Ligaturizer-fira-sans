@@ -57,11 +57,10 @@ jobs:
           mkdir -p fonts/output
           TTF_COUNT=$(find fonts/output -name "*.ttf" -type f | wc -l)
           if [ "$TTF_COUNT" -gt 0 ]; then
-            cd fonts/output
-            tar -czf LigaFiraSans-${{ steps.short_sha.outputs.value }}.tar.gz *.ttf
-            zip -q LigaFiraSans-${{ steps.short_sha.outputs.value }}.zip *.ttf
+            cd fonts
+            tar -czf LigaFiraSans-${{ steps.short_sha.outputs.value }}.tar.gz output/*.ttf
+            zip -q LigaFiraSans-${{ steps.short_sha.outputs.value }}.zip output/*.ttf
             ls -lh LigaFiraSans-*
-            cd ..
           else
             echo "No TTF files found in fonts/output"
             exit 1
